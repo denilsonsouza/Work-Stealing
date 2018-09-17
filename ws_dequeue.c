@@ -6,7 +6,11 @@ dequeue deq_create(){
   dequeue q = malloc(sizeof(struct dequeue));
   q -> head = dcons(NULL, NULL, NULL);
   q -> tail = dcons(NULL, NULL, NULL);
+<<<<<<< HEAD
   q -> head -> next = q -> tail; //auto apontamento, para definir vazio
+=======
+  q -> head -> next = q -> tail;
+>>>>>>> 1ccdff882f859c4f23a698024a1ca43a03668dc2
   q -> tail -> prev = q -> head;
   return q;
 }

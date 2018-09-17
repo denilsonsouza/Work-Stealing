@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+<<<<<<< HEAD
 #include <mpi.h>
 #include <assert.h>
 #include "ws_task.h"
@@ -50,3 +51,11 @@ int main(int argc, char* argv[]) {
 // Passo 4. Finalize o MPI
     MPI_Finalize();
 } /* main */
+=======
+#include <pthread.h>
+#include <assert.h>
+#include <utmpx.h>
+#include <unistd.h>
+#include "ws_task.h"
+
+>>>>>>> 1ccdff882f859c4f23a698024a1ca43a03668dc2

@@ -7,7 +7,10 @@
 typedef struct task {
   void* result;
   dequeue *list_task;
+<<<<<<< HEAD
  
+=======
+>>>>>>> 1ccdff882f859c4f23a698024a1ca43a03668dc2
 } task;
 
 
