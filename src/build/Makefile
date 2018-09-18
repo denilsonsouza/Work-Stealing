@@ -169,6 +169,60 @@ ws_test_task/fast:
 	$(MAKE) -f CMakeFiles/ws_test_task.dir/build.make CMakeFiles/ws_test_task.dir/build
 .PHONY : ws_test_task/fast
 
+ws_dequeue.o: ws_dequeue.c.o
+
+.PHONY : ws_dequeue.o
+
+# target to build an object file
+ws_dequeue.c.o:
+	$(MAKE) -f CMakeFiles/ws_test_task.dir/build.make CMakeFiles/ws_test_task.dir/ws_dequeue.c.o
+.PHONY : ws_dequeue.c.o
+
+ws_dequeue.i: ws_dequeue.c.i
+
+.PHONY : ws_dequeue.i
+
+# target to preprocess a source file
+ws_dequeue.c.i:
+	$(MAKE) -f CMakeFiles/ws_test_task.dir/build.make CMakeFiles/ws_test_task.dir/ws_dequeue.c.i
+.PHONY : ws_dequeue.c.i
+
+ws_dequeue.s: ws_dequeue.c.s
+
+.PHONY : ws_dequeue.s
+
+# target to generate assembly for a file
+ws_dequeue.c.s:
+	$(MAKE) -f CMakeFiles/ws_test_task.dir/build.make CMakeFiles/ws_test_task.dir/ws_dequeue.c.s
+.PHONY : ws_dequeue.c.s
+
+ws_dlist.o: ws_dlist.c.o
+
+.PHONY : ws_dlist.o
+
+# target to build an object file
+ws_dlist.c.o:
+	$(MAKE) -f CMakeFiles/ws_test_task.dir/build.make CMakeFiles/ws_test_task.dir/ws_dlist.c.o
+.PHONY : ws_dlist.c.o
+
+ws_dlist.i: ws_dlist.c.i
+
+.PHONY : ws_dlist.i
+
+# target to preprocess a source file
+ws_dlist.c.i:
+	$(MAKE) -f CMakeFiles/ws_test_task.dir/build.make CMakeFiles/ws_test_task.dir/ws_dlist.c.i
+.PHONY : ws_dlist.c.i
+
+ws_dlist.s: ws_dlist.c.s
+
+.PHONY : ws_dlist.s
+
+# target to generate assembly for a file
+ws_dlist.c.s:
+	$(MAKE) -f CMakeFiles/ws_test_task.dir/build.make CMakeFiles/ws_test_task.dir/ws_dlist.c.s
+.PHONY : ws_dlist.c.s
+
 ws_test_task.o: ws_test_task.c.o
 
 .PHONY : ws_test_task.o
@@ -209,6 +263,12 @@ help:
 	@echo "... ws_test_task"
 	@echo "... rebuild_cache"
 	@echo "... install"
+	@echo "... ws_dequeue.o"
+	@echo "... ws_dequeue.i"
+	@echo "... ws_dequeue.s"
+	@echo "... ws_dlist.o"
+	@echo "... ws_dlist.i"
+	@echo "... ws_dlist.s"
 	@echo "... ws_test_task.o"
 	@echo "... ws_test_task.i"
 	@echo "... ws_test_task.s"

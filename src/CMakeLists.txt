@@ -17,7 +17,7 @@ find_package(MPI QUIET)
   endif ()
 
 
-    add_executable(ws_test_task ws_test_task.c)
+    add_executable(ws_test_task  ws_dequeue.c ws_dlist.c ws_test_task.c)
     target_include_directories (ws_test_task PUBLIC ${MPI_C_INCLUDE_PATH} )
     target_compile_options (ws_test_task PUBLIC ${MPI_C_COMPILE_FLAGS} )
     target_link_libraries (ws_test_task ${MPI_C_LIBRARIES} ${MPI_C_LINK_FLAGS} m)

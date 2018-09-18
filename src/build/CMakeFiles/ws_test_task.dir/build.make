@@ -57,9 +57,57 @@ include CMakeFiles/ws_test_task.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/ws_test_task.dir/flags.make
 
+CMakeFiles/ws_test_task.dir/ws_dequeue.c.o: CMakeFiles/ws_test_task.dir/flags.make
+CMakeFiles/ws_test_task.dir/ws_dequeue.c.o: ../ws_dequeue.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/denilson/Documentos/Work-Stealing/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ws_test_task.dir/ws_dequeue.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ws_test_task.dir/ws_dequeue.c.o   -c /home/denilson/Documentos/Work-Stealing/src/ws_dequeue.c
+
+CMakeFiles/ws_test_task.dir/ws_dequeue.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ws_test_task.dir/ws_dequeue.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/denilson/Documentos/Work-Stealing/src/ws_dequeue.c > CMakeFiles/ws_test_task.dir/ws_dequeue.c.i
+
+CMakeFiles/ws_test_task.dir/ws_dequeue.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ws_test_task.dir/ws_dequeue.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/denilson/Documentos/Work-Stealing/src/ws_dequeue.c -o CMakeFiles/ws_test_task.dir/ws_dequeue.c.s
+
+CMakeFiles/ws_test_task.dir/ws_dequeue.c.o.requires:
+
+.PHONY : CMakeFiles/ws_test_task.dir/ws_dequeue.c.o.requires
+
+CMakeFiles/ws_test_task.dir/ws_dequeue.c.o.provides: CMakeFiles/ws_test_task.dir/ws_dequeue.c.o.requires
+	$(MAKE) -f CMakeFiles/ws_test_task.dir/build.make CMakeFiles/ws_test_task.dir/ws_dequeue.c.o.provides.build
+.PHONY : CMakeFiles/ws_test_task.dir/ws_dequeue.c.o.provides
+
+CMakeFiles/ws_test_task.dir/ws_dequeue.c.o.provides.build: CMakeFiles/ws_test_task.dir/ws_dequeue.c.o
+
+
+CMakeFiles/ws_test_task.dir/ws_dlist.c.o: CMakeFiles/ws_test_task.dir/flags.make
+CMakeFiles/ws_test_task.dir/ws_dlist.c.o: ../ws_dlist.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/denilson/Documentos/Work-Stealing/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/ws_test_task.dir/ws_dlist.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ws_test_task.dir/ws_dlist.c.o   -c /home/denilson/Documentos/Work-Stealing/src/ws_dlist.c
+
+CMakeFiles/ws_test_task.dir/ws_dlist.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ws_test_task.dir/ws_dlist.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/denilson/Documentos/Work-Stealing/src/ws_dlist.c > CMakeFiles/ws_test_task.dir/ws_dlist.c.i
+
+CMakeFiles/ws_test_task.dir/ws_dlist.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ws_test_task.dir/ws_dlist.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/denilson/Documentos/Work-Stealing/src/ws_dlist.c -o CMakeFiles/ws_test_task.dir/ws_dlist.c.s
+
+CMakeFiles/ws_test_task.dir/ws_dlist.c.o.requires:
+
+.PHONY : CMakeFiles/ws_test_task.dir/ws_dlist.c.o.requires
+
+CMakeFiles/ws_test_task.dir/ws_dlist.c.o.provides: CMakeFiles/ws_test_task.dir/ws_dlist.c.o.requires
+	$(MAKE) -f CMakeFiles/ws_test_task.dir/build.make CMakeFiles/ws_test_task.dir/ws_dlist.c.o.provides.build
+.PHONY : CMakeFiles/ws_test_task.dir/ws_dlist.c.o.provides
+
+CMakeFiles/ws_test_task.dir/ws_dlist.c.o.provides.build: CMakeFiles/ws_test_task.dir/ws_dlist.c.o
+
+
 CMakeFiles/ws_test_task.dir/ws_test_task.c.o: CMakeFiles/ws_test_task.dir/flags.make
 CMakeFiles/ws_test_task.dir/ws_test_task.c.o: ../ws_test_task.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/denilson/Documentos/Work-Stealing/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ws_test_task.dir/ws_test_task.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/denilson/Documentos/Work-Stealing/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/ws_test_task.dir/ws_test_task.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ws_test_task.dir/ws_test_task.c.o   -c /home/denilson/Documentos/Work-Stealing/src/ws_test_task.c
 
 CMakeFiles/ws_test_task.dir/ws_test_task.c.i: cmake_force
@@ -83,16 +131,20 @@ CMakeFiles/ws_test_task.dir/ws_test_task.c.o.provides.build: CMakeFiles/ws_test_
 
 # Object files for target ws_test_task
 ws_test_task_OBJECTS = \
+"CMakeFiles/ws_test_task.dir/ws_dequeue.c.o" \
+"CMakeFiles/ws_test_task.dir/ws_dlist.c.o" \
 "CMakeFiles/ws_test_task.dir/ws_test_task.c.o"
 
 # External object files for target ws_test_task
 ws_test_task_EXTERNAL_OBJECTS =
 
+ws_test_task: CMakeFiles/ws_test_task.dir/ws_dequeue.c.o
+ws_test_task: CMakeFiles/ws_test_task.dir/ws_dlist.c.o
 ws_test_task: CMakeFiles/ws_test_task.dir/ws_test_task.c.o
 ws_test_task: CMakeFiles/ws_test_task.dir/build.make
 ws_test_task: /usr/lib/x86_64-linux-gnu/libmpich.so
 ws_test_task: CMakeFiles/ws_test_task.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/denilson/Documentos/Work-Stealing/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable ws_test_task"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/denilson/Documentos/Work-Stealing/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable ws_test_task"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ws_test_task.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -100,6 +152,8 @@ CMakeFiles/ws_test_task.dir/build: ws_test_task
 
 .PHONY : CMakeFiles/ws_test_task.dir/build
 
+CMakeFiles/ws_test_task.dir/requires: CMakeFiles/ws_test_task.dir/ws_dequeue.c.o.requires
+CMakeFiles/ws_test_task.dir/requires: CMakeFiles/ws_test_task.dir/ws_dlist.c.o.requires
 CMakeFiles/ws_test_task.dir/requires: CMakeFiles/ws_test_task.dir/ws_test_task.c.o.requires
 
 .PHONY : CMakeFiles/ws_test_task.dir/requires

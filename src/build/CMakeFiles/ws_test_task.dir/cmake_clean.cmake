@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/ws_test_task.dir/ws_dequeue.c.o"
+  "CMakeFiles/ws_test_task.dir/ws_dlist.c.o"
   "CMakeFiles/ws_test_task.dir/ws_test_task.c.o"
   "ws_test_task.pdb"
   "ws_test_task"

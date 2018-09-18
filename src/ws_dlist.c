@@ -1,4 +1,4 @@
-#include "ws_dlist.h"
+#include "../include/ws_dlist.h"
 #include <stdlib.h>
 
 dlist dcons(void *element, dlist prev, dlist next){

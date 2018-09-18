@@ -1,5 +1,5 @@
-#include "ws_dequeue.h"
-#include "ws_dlist.h"
+#include "../include/ws_dequeue.h"
+#include "../include/ws_dlist.h"
 #include <stdlib.h>
 
 dequeue deq_create(){

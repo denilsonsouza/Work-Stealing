@@ -4,6 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/denilson/Documentos/Work-Stealing/src/ws_dequeue.c" "/home/denilson/Documentos/Work-Stealing/src/build/CMakeFiles/ws_test_task.dir/ws_dequeue.c.o"
+  "/home/denilson/Documentos/Work-Stealing/src/ws_dlist.c" "/home/denilson/Documentos/Work-Stealing/src/build/CMakeFiles/ws_test_task.dir/ws_dlist.c.o"
   "/home/denilson/Documentos/Work-Stealing/src/ws_test_task.c" "/home/denilson/Documentos/Work-Stealing/src/build/CMakeFiles/ws_test_task.dir/ws_test_task.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
