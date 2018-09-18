@@ -1,17 +1,4 @@
-<<<<<<< HEAD
 
-/**
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- **/
-
-=======
->>>>>>> 1ccdff882f859c4f23a698024a1ca43a03668dc2
 #ifndef WS_DEQUEUE_H
 #define WS_DEQUEUE_H
 #include "ws_dlist.h"
