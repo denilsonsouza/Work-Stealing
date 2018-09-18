@@ -23,4 +23,4 @@ find_package(MPI QUIET)
     target_link_libraries (ws_test_task ${MPI_C_LIBRARIES} ${MPI_C_LINK_FLAGS} m)
     install (TARGETS ws_test_task DESTINATION bin)
 
-endif()
+endif() 

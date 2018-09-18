@@ -88,22 +88,29 @@ int main(int argc, char *argv[]){
     workers[i].num_workers = i;
     workers[i].workers = workers;
   } */
-  
+ 
 
 
   MPI_Init(&argc, &argv);
   MPI_Comm_rank(MPI_COMM_WORLD, &comm_rank);
   MPI_Comm_size(MPI_COMM_WORLD, &p);
-
   /* initializations for test */
-   printf("Inicializando...");
+   printf("Inicializando...\n");
+   printf("processadores: %d \n",p);
   for (size_t i = 0; i < p; i++)
   {
     printf("%zd \n", i);
     localQueue[i] = deq_create();
+    
+    void *element;
+    deq_pushBack(localQueue[i],element);
+    localQueue[i]->tail->element = "Wait"; // adiciona 
+    deq_popBack(localQueue[i]); // remove
   } 
-
-
+  //printf("%s \n", localQueue[0]->tail->element);
+  
+  
+  
   ws_make_progress(localQueue);
  
   MPI_Send(&comm_rank, 1, MPI_INT, p - 1 - comm_rank, tag, MPI_COMM_WORLD);
