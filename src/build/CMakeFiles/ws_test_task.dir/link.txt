@@ -1,1 +1,0 @@
-/usr/bin/cc   -rdynamic CMakeFiles/ws_test_task.dir/ws_dequeue.c.o CMakeFiles/ws_test_task.dir/ws_dlist.c.o CMakeFiles/ws_test_task.dir/ws_test_task.c.o  -o ws_test_task -lmpich -Wl,-Bsymbolic-functions -Wl,-z,relro -lm 

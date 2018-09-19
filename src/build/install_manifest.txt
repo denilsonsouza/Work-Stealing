@@ -1,1 +1,0 @@
-/home/denilson/Documentos/Work-Stealing/bin/ws_test_task
