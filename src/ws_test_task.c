@@ -8,17 +8,10 @@
 typedef struct _worker
 {
   int id;
- // task *tasks;
-  struct _worker *workers;
   dequeue ws_task;
   long num_workers;
   int logged_worker;
 } worker;
-
-/** Global State **/
-//static dequeue  localQueue;    // double ended queue of local only work
-//verificar como terminar o WS
-//static enum colors my_color;      // Ring-based termination detection
 
 static int last_steal;    // Rank of last thread stolen from
 static long chunks_recvd; // Total messages received
@@ -33,12 +26,13 @@ static int comm_size, comm_rank;
 void ws_make_progress(dequeue *s)
 {
  
-  //size_t victim;
-  printf("Retorno : %d \n",deq_isEmpty(s[comm_rank]));
-  if (!deq_isEmpty(s[comm_rank]))
+  int victim;
+  printf("Vazio? : %d \n",deq_isEmpty(s[comm_rank]));
+  if (deq_isEmpty(s[comm_rank]))
   {
      // randomico processador
-    //victim = random() % data->num_workers;
+    victim = random() % 4;
+    printf("Victim %d \n", victim);
     // sender mensagem
     // se tem retorno
     // faz work-stealing
@@ -79,43 +73,37 @@ int main(int argc, char *argv[]){
   MPI_Status status; /* return status for receive */
   int i;
   dequeue localQueue[p]; /* Lista para cada processador */
-  worker workers[p]; /* Works for Work-stealing*/
+  worker workers[p]; /* Works fpork-stealing*/
   
-  
-/*   for(int i = 0; i < p; i++)
-  {
-    workers[i].id = i;
-    workers[i].num_workers = i;
-    workers[i].workers = workers;
-  } */
- 
-
-
   MPI_Init(&argc, &argv);
   MPI_Comm_rank(MPI_COMM_WORLD, &comm_rank);
   MPI_Comm_size(MPI_COMM_WORLD, &p);
   /* initializations for test */
-   printf("Inicializando...\n");
-   printf("processadores: %d \n",p);
-  for (size_t i = 0; i < p; i++)
-  {
-    printf("%zd \n", i);
+  printf("Inicializando...\n");
+  printf("processadores: %d \n",p);
+  for(int i = 0; i < p; i++){
+    workers[i].id = i;
+    workers[i].num_workers = p;
     localQueue[i] = deq_create();
-    
+    workers[i].ws_task = localQueue[i];
+   }
+  /*Inserindo elementos*/
+  for (int i = 0; i < 1000; i++){
+    //printf("%zd \n", i);
     void *element;
-    deq_pushBack(localQueue[i],element);
-    localQueue[i]->tail->element = "Wait"; // adiciona 
-    deq_popBack(localQueue[i]); // remove
+    deq_pushBack(workers[0].ws_task,element);
+    workers[0].ws_task->tail->element = "Wait"; // adiciona 
+    //deq_popBack(localQueue[i]); // remove
   } 
   //printf("%s \n", localQueue[0]->tail->element);
   
   
   
-  ws_make_progress(localQueue);
+  //ws_make_progress(localQueue);
  
-  MPI_Send(&comm_rank, 1, MPI_INT, p - 1 - comm_rank, tag, MPI_COMM_WORLD);
-  MPI_Recv(&dest, 1, MPI_INT, p - 1 - comm_rank, tag, MPI_COMM_WORLD, &status);
-  printf("Meu rank %d rank recebido %d\n", comm_rank, dest);
+  //MPI_Send(&comm_rank, 1, MPI_INT, p - 1 - comm_rank, tag, MPI_COMM_WORLD);
+  //MPI_Recv(&dest, 1, MPI_INT, p - 1 - comm_rank, tag, MPI_COMM_WORLD, &status);
+  // printf("Meu rank %d rank recebido %d\n", comm_rank, dest);
 
   MPI_Finalize();
 } /* main */
