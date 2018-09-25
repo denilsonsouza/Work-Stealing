@@ -14,19 +14,19 @@ dequeue deq_create(){
 int deq_isEmpty(dequeue q) {
   return q -> head -> next == q -> tail;
 }
-
+/* insert an element at the front of the dqueue */
 void deq_pushFront(dequeue q, void *element) {
   create_and_link(element, q->head, q->head->next);
 }
-
+/* insert an element at the back of the dqueue */ 
 void deq_pushBack(dequeue q, void *element){
   create_and_link(element, q->tail->prev, q->tail);
 }
-
+/* delete an element from the front of the dqueue and return it */
 void* deq_popFront(dequeue q){
   return unlink_and_free(q->head->next);
 }
-
+/* delete an element from the back of the dqueue and return it */
 void* deq_popBack(dequeue q) {
   return unlink_and_free(q->tail->prev);
 }
