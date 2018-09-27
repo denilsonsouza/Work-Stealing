@@ -31,80 +31,41 @@ static long ctrl_sent;    // Total messages sent
 */
 
 /** Global Parameters: Set in ss_init() **/
-static int comm_size, comm_rank;
+static int comm_size, comm_rank,msg;
 static MPI_Request ws_request[WS_NUM_MSG_TYPE];
+static MPI_Request wrin_request; // Incoming steal request 
 
-void ws_make_progress(worker *s)
-{
+void ws_make_progress(worker *s){
 
   MPI_Status status;
-  int msg, flag2, index, index2, victim;
+  int flag2, index, index2, victim;
   void *work;
   int attempt = 0;
-  if (deq_isEmpty(s[comm_rank].ws_task))
-  {
+  if (deq_isEmpty(s[comm_rank].ws_task)){
     // randomico processador
     //do{
-    victim = random() % 4;
-
+    victim = 0;//random() % 4;
+    printf("Rank: %d , Victim: %d\n",comm_rank,victim);
     //while(!ativo(all))
     msg = WS_RESQUEST_WORK_MSG;
 
-    /* MPI_Send(&msg, 1, MPI_INT, victim, WS_RESQUEST_WORK_MSG, MPI_COMM_WORLD);
-
-    MPI_Irecv(&flag2, 1, MPI_INT, victim, WS_TASK_MSG, MPI_COMM_WORLD, &ws_request[WS_TASK_REQUEST]);
-
-    MPI_Irecv(&flag2, 1, MPI_INT, victim, WS_TASK_MSG, MPI_COMM_WORLD, &ws_request[WS_EMPTY_MSG]); */
-    flag2 = 1;
-    do
-    {
-      printf("Test tag %d!!\n", comm_rank);
-    } while (flag2 == 0);
-    /*   for (int i=0; i < WS_NUM_MSG_TYPE;i++)
-        if(i!=index2)
-          MPI_Cancel(&(ws_request[i]));
-     */
-
-    switch (status.MPI_TAG)
-    {
-    case WS_TASK_MSG:
-      printf("Ops Task");
-      break;
-
-    case WS_EMPTY_MSG:
-      printf("Ops Zerp");
-      break;
-    }
-
-    printf("Tentativa: %d \n", attempt);
-    attempt = attempt + 1;
-  }
-  else
-  { // processa
-    index = deq_length(s[comm_rank].ws_task);
-    while (1)
-    {
-      MPI_Status status2;
-      int flag;
-      index = deq_length(s[comm_rank].ws_task);
-      printf("Tamanho %d \n", deq_length(s[comm_rank].ws_task));
-
-      while (deq_length(s[comm_rank].ws_task) > 0)
-      {
+    MPI_Send(&msg, 1, MPI_INT, 0, WS_RESQUEST_WORK_MSG, MPI_COMM_WORLD);
+    
+    
+  }else{ // processa  
+    
+    
+    while (!deq_isEmpty(s[comm_rank].ws_task)){
         //remove
         void *element;
         element = deq_popFront(s[comm_rank].ws_task); // remove
         printf("%s::%d \n", (char *)element, deq_length(s[comm_rank].ws_task));
         sleep(random() % 2);
-      }
+        process_work_request(s[comm_rank].ws_task);
 
-      if (index == 0)
-      {
-        printf("rank %d finishing\n", comm_rank);
-        break;
-      }
-    } //while
+    }
 
+    printf("rank %d finishing\n", comm_rank);
   } //end-if
 
 } //end-method
@@ -128,6 +89,84 @@ void ss_init(worker *s, int num){
   }
 }
 
+
+void process_work_request(dequeue s){
+    
+    MPI_Status status;
+    int index, flag;
+    
+    MPI_Irecv(&msg, 1, MPI_INT, MPI_ANY_SOURCE, WS_RESQUEST_WORK_MSG, MPI_COMM_WORLD, &(ws_request[WS_TASK_REQUEST]));
+    MPI_Irecv(&msg, 1, MPI_INT, MPI_ANY_SOURCE, WS_RESQUEST_WORK_MSG, MPI_COMM_WORLD, &(ws_request[WS_EMPTY_MSG]));
+    
+  
+    
+    
+    if (deq_length(s)){
+            // pop task in FIFO order
+            void *element;
+            element = deq_popBack(s);
+            //task_t task = tasks.back();
+            //tasks.pop_back();
+
+            // synchronous user processing
+            //steal(task);
+            //printf("%s::%d \n", (char *)element, deq_length(s));
+            sleep(random() % 2);
+
+            // give it to the thift
+            //thief.tasks.push_back(task);
+    }
+        // notify the thief that the operation is completed
+       // thief.steal_ack.store(1, memory_order_release);
+       return;
+ }
+
+
+//Make request of the steal...
+int mpi_workstealing(worker *steal){
+   
+   int i,msg,victim, ws_flag, ws_index;
+   MPI_Request ws_request2[WS_NUM_MSG_TYPE];
+   MPI_Status ws_status;
+   void * element;
+   if(!deq_isEmpty(steal[comm_rank].ws_task))
+     return 1;
+   steal[comm_rank].logged_worker=1; // sem tarefa
+
+  
+  while(1){
+    do{
+      victim = rand()% steal->num_workers;
+    }while(victim!=comm_rank);
+
+    msg =  WS_RESQUEST_WORK_MSG;
+    MPI_Send(&msg,1,MPI_INT,victim,WS_RESQUEST_WORK_MSG,MPI_COMM_WORLD);
+    MPI_Irecv(&element, 1, MPI_INT, victim, WS_TASK_MSG,MPI_COMM_WORLD, &(ws_request[WS_TASK_REQUEST]) );
+    MPI_Irecv(&element, 1, MPI_INT, victim, WS_EMPTY_MSG,MPI_COMM_WORLD, &(ws_request[WS_EMPTY_REQUEST]) );
+    ws_flag = 0;
+    do {
+      MPI_Testany(WS_NUM_MSG_TYPE, ws_request, &ws_index,&ws_flag, &ws_status );
+     // mpi_ws_process_nonblocking(workst, benchmark);
+    } while ( ws_flag == 0 );
+    for (i = 0; i < WS_NUM_MSG_TYPE; i ++)
+      if ( i != ws_index)
+      MPI_Cancel(&(ws_request[i]));
+      switch ( ws_status.MPI_TAG ) {
+        case WS_TASK_MSG :
+          element = deq_popBack(steal[comm_size].ws_task);
+          return 1;
+        case WS_EMPTY_MSG :
+          //set_proc_inactive(&(workst -> ws_proc_table),ws_status.MPI_SOURCE);
+          break;
+      }
+    }
+ return 0;
+}
+
+
+
+
+
 int main(int argc, char *argv[])
 {
 
@@ -142,12 +181,16 @@ int main(int argc, char *argv[])
   MPI_Comm_size(MPI_COMM_WORLD, &p);
 
   worker workers[p]; /* Works for work-stealing  */
+  
   ss_init(workers,p);
-  ws_make_progress(workers);
+  
+  if(mpi_workstealing(workers)==1){
+    printf("OK.");
+  }else{
+    printf("Ops.");
+  }
 
-  //MPI_Send(&comm_rank, 1, MPI_INT, p - 1 - comm_rank, tag, MPI_COMM_WORLD);
-  //MPI_Recv(&dest, 1, MPI_INT, p - 1 - comm_rank, tag, MPI_COMM_WORLD, &status);
-  //printf("Meu rank %d rank recebido %d\n", comm_rank, dest);
+  //ws_make_progress(workers);
 
   MPI_Finalize();
 } /* main */
